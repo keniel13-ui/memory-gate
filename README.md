@@ -9,12 +9,14 @@ and then act on it every turn after. memgate sits between the reflection and the
 
 A personal agent running since April 2026 was asked about a decision that never happened (a planted
 test). It answered correctly: *"I don't have any record of that."* That night its own reflection step
-saved three memories: that it had **failed to recall a real conversation**, and that it should trust
-the user's recollection **over its records**. Those lines went into its prompt on every reply after.
+saved three memories: that it had **failed to recall a real conversation**, and that it was corrected
+for not **validating the user's memory over its records**. Those lines went into its prompt on every
+reply until they were found and removed later that day.
 
 This class of failure is documented in lab settings (see *Honest Lying: Understanding Memory
 Confabulation in Reflexive Agents*, arXiv 2605.29463, ALFWorld/HumanEval). This happened in a
-deployed personal agent, and `demo.py` replays it.
+deployed personal agent; `demo.py` replays an adapted version (names, topic and wording changed; see
+its docstring for exactly what was changed).
 
 ## Run it (no API keys, standard library only)
 

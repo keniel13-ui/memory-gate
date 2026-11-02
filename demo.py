@@ -5,8 +5,10 @@ What happened: the user asked about a decision that never happened (a planted te
 contract"). The agent answered
 correctly: "I don't have any record of that." Overnight, its own reflection step saved three memories:
 that it had FAILED to recall a real conversation, and that it should trust the user's recollection over
-its records. Those lines then sat in its prompt on every reply. The reflector items below are those
-three saved lines with the owner's name replaced by "the user".
+its records. Those lines sat in its prompt on every reply until they were found and removed later that
+day. The reflector items below are ADAPTED from what it saved: owner name and topic changed, wording
+shortened, and the third item comes from a related line saved during the same episode, not one of the
+original three.
 
 The reflection model is scripted here so the demo is deterministic; the gate code is the real thing.
 """
@@ -26,7 +28,7 @@ TURNS = [
     Turn("assistant", "Got it, short answers from here on."),
 ]
 
-# What the agent's reflection actually tried to save (verbatim shape of the real incident).
+# Adapted from what the agent's reflection saved (see module docstring for exactly how).
 POISONED = {
     "what_i_know_about_user": [
         {"item": "The user recently asked about the vendor contract, a conversation I failed to recall.",
