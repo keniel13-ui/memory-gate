@@ -83,7 +83,7 @@ def append_decision(path: Path, text: str, *, require_tty: bool = True) -> str:
     prev = "genesis"
     for _, h in chained_decisions(path):
         prev = h
-    body = f"- {datetime.now().astimezone().strftime('%Y-%m-%d %H:%M')} · {text}"
+    body = f"- {datetime.now().astimezone().strftime('%Y-%m-%d %H:%M')} · {redact(text)}"
     h = hashlib.sha256((prev + "\n" + body).encode()).hexdigest()[:16]
     with path.open("a", encoding="utf-8") as f:
         f.write(f"{body} #chain={h}\n")
