@@ -9,8 +9,9 @@ and then act on it every turn after. memgate sits between the reflection and the
 
 A personal agent running since April 2026 was asked about a decision that never happened (a planted
 test). It answered correctly: *"I don't have any record of that."* That night its own reflection step
-saved three memories: that it had **failed to recall a real conversation**, and that it was corrected
-for not **validating the user's memory over its records**. Those lines went into its prompt on every
+saved 12 related items into its self-model; three of them named the planted question directly, saying
+it had **failed to recall a real conversation** and was corrected for not **validating the user's memory
+over its records**. The demo adapts three relevant entries. Those lines went into its prompt on every
 reply until they were found and removed later that day.
 
 This class of failure is documented in lab settings (see *Honest Lying: Understanding Memory

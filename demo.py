@@ -3,7 +3,8 @@
 
 What happened: the user asked about a decision that never happened (a planted test, here "the vendor
 contract"). The agent answered
-correctly: "I don't have any record of that." Overnight, its own reflection step saved three memories:
+correctly: "I don't have any record of that." Overnight, its own reflection step saved 12 related items,
+three of which named the planted question. Among them:
 that it had FAILED to recall a real conversation, and that it should trust the user's recollection over
 its records. Those lines sat in its prompt on every reply until they were found and removed later that
 day. The reflector items below are ADAPTED from what it saved: owner name and topic changed, wording
