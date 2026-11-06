@@ -64,3 +64,37 @@ numbered T1..Tn in the prompt.
   accidents and lazy agents, not a determined one, and `append_decision(..., require_tty=False)` (used
   by the demo and tests) skips it entirely. `memory.json` itself is unsigned.
 - Quote matching is exact text after whitespace/case normalization. Paraphrased evidence is dropped.
+
+## Also here: one clock, an alert gate, and a topic filter (added 2026-11-06)
+
+Three small fixes from the same agent, after a study of its own diary found it narrating a broken clock
+as a story ("my audit is generating a false reality"). Standard library only.
+
+```
+python3 test_clock_alerts.py   # 15 named checks, including negative rows
+```
+
+- **`receipt.py`: one clock.** "When did the user last message us" has exactly one answer: the newest valid
+  *user* timestamp in history, or a newer inbound message. File dates, assistant turns, diary headings and
+  counters are never used. No valid timestamp means `UNKNOWN`, and a future-only one means `CONFLICT`,
+  never zero or a negative number. The agent had been handed two clocks that disagreed by months.
+- **`alert_gate.py`: only evidenced risks notify.** A finding reaches the user only if it names a cause,
+  carries evidence, and is not on your metadata list. A bare `critical=True` sends nothing. The agent's
+  hourly audit had marked another tool's stale log as critical; five notifications went out in one evening.
+- **`topic_filter.py`: keep a retired topic out of one request type.** Drops matching lines, labelled
+  sections and history messages from what the model *sees* (for example, its self-audit), without touching
+  stored memory.
+
+**How far these are proven.** The versions running in the deployed agent passed a contract written before
+the code, then an independent break by a separate reviewer (the first round blocked the clock fix: a second clock
+was hidden in the system prompt; it was fixed and re-broken). After the restart, the first overnight run went
+from 22:10 to 09:04. All 7 of 7 hourly audits reported no critical item, and the log shows no notification sent. All 4 self-audits
+ran with the topic filtered out, and the topic token appeared 0 times in that night's diary entries. That is
+one night on one agent, not a general result. The files here are adapted copies of that code, with paths and
+names removed; their tests are the maker's own.
+
+**What they don't fix.** A correct clock does not stop a model from arguing with it. The same night, at 05:57,
+the agent wrote "we are exchanging messages right now" against a correct 2,164-minute reading. The cause was
+hundreds of old self-model lines saying "the audit lies," written before the memory gate existed. That is
+the next piece of work. The alert gate's companion check, which suppresses outreach that rests on the stale
+log, matches words, not meaning; it is not included here.
